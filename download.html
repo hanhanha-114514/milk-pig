@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>下载安装 — 奶猪水课助手</title>
+<meta name="description" content="下载奶猪水课助手 v2.3.46，Edge / Chrome 开发者模式下加载解压缩扩展即可使用。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23e8618c'/%3E%3Crect x='9' y='13' width='14' height='7' rx='3.5' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/theme.css">
+<script>
+(function () {
+  var d = document.documentElement;
+  d.classList.add('js');
+  var t = null;
+  try { t = localStorage.getItem('nzsk-theme'); } catch (e) {}
+  if (!t && window.matchMedia) { t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+  d.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
+  d.classList.add('intro');
+  /* 兜底：外部脚本异常时也不会卡在遮罩里 */
+  setTimeout(function () {
+    d.classList.remove('intro');
+    var v = document.getElementById('intro-veil');
+    if (v) { v.classList.add('out'); setTimeout(function () { if (v.parentNode) { v.parentNode.removeChild(v); } }, 800); }
+  }, 2600);
+})();
+</script>
+</head>
+<body>
+
+<div class="intro-veil" id="intro-veil" aria-hidden="true">
+  <div class="intro-inner">
+    <span class="intro-mark"><span></span></span>
+    <div class="intro-word">奶猪水课助手</div>
+    <div class="intro-track"><i></i></div>
+    <div class="intro-meta" data-intro-pct>正在进入 · 0%</div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true"><span></span></span>
+      奶猪水课助手
+    </a>
+    <button class="nav-toggle" aria-label="打开导航" aria-expanded="false"><span></span><span></span><span></span></button>
+    <div class="nav-end">
+      <nav class="nav-links">
+      <a href="index.html">首页</a>
+      <a href="download.html" class="active">下载安装</a>
+      <a href="docs.html">使用说明</a>
+      <a href="changelog.html">更新日志</a>
+      <a href="https://github.com/hanhanha-114514/naizhu-course-helper/releases/download/v2.3.46/naizhu-course-helper-v2.3.46.zip" class="nav-cta" data-download>下载</a>
+    </nav>
+      <button class="theme-switch" type="button" role="switch" aria-checked="false" aria-label="切换深浅色">
+        <span class="ic ic-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6L17 7M7 17l-1.4 1.4"/></svg></span>
+        <span class="ic ic-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 019.5 4a7.5 7.5 0 1010.5 10.5z"/></svg></span>
+        <span class="knob"></span>
+      </button>
+      </div>
+    </div>
+</header>
+
+<main>
+
+  <section class="section" style="padding-bottom:0">
+    <div class="wrap">
+      <span class="eyebrow">下载</span>
+      <h1 style="font-size:clamp(30px,4vw,44px)">下载奶猪水课助手</h1>
+      <p class="lede">解压即用，源码随包提供。不需要商店账号，也不需要联网安装。</p>
+
+      <div style="margin-top:40px">
+        <div class="dl-card">
+          <div>
+            <h2>奶猪水课助手 <span class="muted" style="font-weight:500;font-size:18px">v2.3.46</span></h2>
+            <p class="muted" style="margin:8px 0 0;font-size:14.5px">Manifest V3 浏览器扩展 · Edge / Chrome 等 Chromium 内核浏览器</p>
+<div class="dl-meta">
+              <span class="chip accent">最新版本</span>
+              <span class="chip">解压缩加载</span>
+              <span class="chip">含 manifest.json</span>
+              <span class="chip">源码随包</span>
+              <span class="chip">84 KB</span>
+            </div>
+          </div>
+          <div class="dl-right">
+            <a class="btn btn-primary" href="downloads/nzsk-v2.3.46.zip" download data-download>从 GitHub 下载 <span class="arrow">↓</span></a>
+            <span class="muted">naizhu-course-helper-v2.3.46.zip</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="note" style="margin-top:22px">
+        <div>
+          <b>下载来源：</b>按钮直接指向 GitHub Releases 的
+          <code>naizhu-course-helper-v2.3.46.zip</code>，在新标签页打开下载。
+          若 GitHub 直链失效，可在 <code>assets/config.js</code> 清空 <code>githubReleaseUrl</code>，自动回退到站内安装包。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:56px">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">包内结构</span>
+        <h2>14 个文件，84 KB</h2>
+        <p>源码随包提供，结构一目了然。<code>manifest.json</code> 位于压缩包根目录，加载扩展时选中它所在的那一层。</p>
+      </div>
+
+      <div class="tree">
+<div class="dir">奶猪水课助手_v2.3.46.zip</div>
+<div>├─ <b class="key">manifest.json</b> <span class="hint"># 扩展清单（Manifest V3）· 请勿删除</span></div>
+<div>├─ background/service-worker.js <span class="hint"># 学时统计与切章调度</span></div>
+<div>├─ content/panel.js <span class="hint"># 页面右侧粉色面板</span></div>
+<div>├─ inject/keep-alive.js <span class="hint"># 失焦持续播放守护</span></div>
+<div>├─ overlay/overlay.html · overlay.js <span class="hint"># 桌面进度浮层</span></div>
+<div>└─ popup/popup.html · popup.css · popup.js · crypto.js <span class="hint"># 扩展弹窗与设置</span></div>
+<div>   icons/icon16 · icon32 · icon48 · icon128.png <span class="hint"># 图标</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">安装步骤</span>
+        <h2>三步加载到浏览器</h2>
+        <p>装好后打开课程页面，右侧会出现粉色面板。后续更新只需点扩展卡片上的「重新加载」图标，本地设置不会丢失。</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+<h3>解压，别动目录结构</h3>
+          <p>把压缩包解压到一个独立文件夹，确认 <code>manifest.json</code> 与 <code>icons</code>、<code>content</code> 等目录处在同一层。若解压后文件散落在下载目录里，请先把它们一起放进新建的文件夹。</p>
+        </div>
+        <div class="step">
+          <h3>打开扩展页与开发者模式</h3>
+          <p>地址栏输入 <code>edge://extensions</code>（Chrome 为 <code>chrome://extensions</code>），打开右上角的「开发者模式」。</p>
+        </div>
+        <div class="step">
+          <h3>拖入或手动加载</h3>
+          <p>把整个文件夹拖进扩展管理页面；或点「加载解压缩的扩展」，选中该文件夹。</p>
+        </div>
+      </div>
+
+      <div class="note" style="margin-top:44px">
+        <div>
+          <b>加载时提示「清单文件缺失」？</b>
+          说明你选的目录层级不对。请选中直接包含 <code>manifest.json</code> 的那一层文件夹，而不是它的上级目录。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section soft">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">运行环境</span>
+        <h2>需要什么</h2>
+      </div>
+      <dl class="spec">
+        <div>
+          <dt>浏览器</dt>
+          <dd>Edge / Chrome 等 Chromium 内核浏览器</dd>
+        </div>
+        <div>
+          <dt>扩展规范</dt>
+          <dd>Manifest V3</dd>
+        </div>
+        <div>
+          <dt>适用平台</dt>
+          <dd>需累计在线学习时长的课程平台（课程列表 + 弹窗播放器结构）</dd>
+        </div>
+        <div>
+          <dt>申请权限</dt>
+          <dd>storage · scripting · tabs · alarms</dd>
+        </div>
+        <div>
+          <dt>网络</dt>
+          <dd>无需服务端，不上传任何数据</dd>
+        </div>
+        <div>
+          <dt>更新方式</dt>
+          <dd>替换文件后点扩展卡片「重新加载」</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">首次使用</span>
+        <h2>先手动跑完一章，再交给自动</h2>
+      </div>
+      <ul style="color:var(--ink-2);font-size:15px;padding-left:20px;max-width:70ch">
+        <li>打开一个课程章节，确认面板显示「播放中」，且进度数字在增长。</li>
+        <li>确认播放 1 秒后，失焦保护才会启用，刚打开章节时会有几秒缓冲。</li>
+        <li>音量默认 0%，如需按声音判断播放状态，先手动调高再挂机。</li>
+        <li>观察第一章是否按时关闭播放器并进入下一章，再放开自动流程。</li>
+      </ul>
+      <div class="actions">
+        <a href="docs.html" class="btn btn-dark">继续看使用说明 <span class="arrow">→</span></a>
+        <a href="changelog.html" class="btn btn-ghost">本版改了什么</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true"><span></span></span>
+          奶猪水课助手
+        </a>
+        <p>一款让网课「挂着也能学完」的 Chromium 浏览器扩展。不改动平台数据，不替你做考核。</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>产品</h5>
+          <a href="index.html">首页</a>
+          <a href="download.html">下载安装</a>
+          <a href="changelog.html">更新日志</a>
+        </div>
+        <div class="footer-col">
+          <h5>了解</h5>
+          <a href="docs.html#features">功能说明</a>
+          <a href="docs.html#privacy">权限与数据</a>
+          <a href="docs.html#notice">使用须知</a>
+          <a href="docs.html#faq">常见问题</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> 奶猪水课助手 · 作者 Hanhanha</span>
+      <span>v2.3.46 · 请在学校或平台允许的前提下使用</span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="dl-modal" hidden role="dialog" aria-modal="true" aria-labelledby="dl-modal-title">
+  <div class="modal-box">
+    <h3 id="dl-modal-title">安装包暂未开放</h3>
+    <p>当前站点还没有挂上 v2.3.46 的安装包下载入口。开放后，这里会提供压缩包；下载解压即可使用，源码随包提供。</p>
+    <div class="actions">
+      <button class="btn btn-ghost btn-sm" data-close>知道了</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/config.js"></script>
+<script src="assets/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,372 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>奶猪水课助手 — 让网课挂着也能学完</title>
+<meta name="description" content="奶猪水课助手是一款 Chromium 浏览器扩展：失焦不断播、学时达标自动切下一章、课程列表自动翻页，音量与桌面进度都能自己定。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23e8618c'/%3E%3Crect x='9' y='13' width='14' height='7' rx='3.5' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/theme.css">
+<script>
+(function () {
+  var d = document.documentElement;
+  d.classList.add('js');
+  var t = null;
+  try { t = localStorage.getItem('nzsk-theme'); } catch (e) {}
+  if (!t && window.matchMedia) { t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+  d.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
+  d.classList.add('intro');
+  /* 兜底：外部脚本异常时也不会卡在遮罩里 */
+  setTimeout(function () {
+    d.classList.remove('intro');
+    var v = document.getElementById('intro-veil');
+    if (v) { v.classList.add('out'); setTimeout(function () { if (v.parentNode) { v.parentNode.removeChild(v); } }, 800); }
+  }, 2600);
+})();
+</script>
+</head>
+<body>
+
+<div class="intro-veil" id="intro-veil" aria-hidden="true">
+  <div class="intro-inner">
+    <span class="intro-mark"><span></span></span>
+    <div class="intro-word">奶猪水课助手</div>
+    <div class="intro-track"><i></i></div>
+    <div class="intro-meta" data-intro-pct>正在进入 · 0%</div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true"><span></span></span>
+      奶猪水课助手
+    </a>
+    <button class="nav-toggle" aria-label="打开导航" aria-expanded="false"><span></span><span></span><span></span></button>
+    <div class="nav-end">
+      <nav class="nav-links">
+      <a href="index.html" class="active">首页</a>
+      <a href="download.html">下载安装</a>
+      <a href="docs.html">使用说明</a>
+      <a href="changelog.html">更新日志</a>
+      <a href="https://github.com/hanhanha-114514/naizhu-course-helper/releases/download/v2.3.46/naizhu-course-helper-v2.3.46.zip" class="nav-cta" data-download>下载</a>
+    </nav>
+      <button class="theme-switch" type="button" role="switch" aria-checked="false" aria-label="切换深浅色">
+        <span class="ic ic-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6L17 7M7 17l-1.4 1.4"/></svg></span>
+        <span class="ic ic-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 019.5 4a7.5 7.5 0 1010.5 10.5z"/></svg></span>
+        <span class="knob"></span>
+      </button>
+      </div>
+    </div>
+</header>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <span class="glow"></span>
+      <span class="glow b"></span>
+      <span class="dots"></span>
+    </div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="badge"><span class="dot"></span>当前版本 <b>v2.3.46</b> · Manifest V3</span>
+        <h1>网课<em>挂着</em>，<br>也能学完。</h1>
+        <p class="lede">
+          失焦不断播、学时达标自动切下一章、课程列表自动翻页。音量和桌面进度都能自己定——
+          它不改动平台数据，也不替你做考核，只把「等播放进度」这件事挪到后台。
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="downloads/nzsk-v2.3.46.zip" download data-download>下载 v2.3.46 <span class="arrow">↓</span></a>
+          <a href="docs.html" class="btn btn-ghost">看使用说明</a>
+        </div>
+        <div class="hero-meta">
+          <div>适配 <b>Edge / Chrome</b></div>
+          <div>类型 <b>浏览器扩展</b></div>
+          <div>数据 <b>全部本地</b></div>
+          <div>作者 <b>Hanhanha</b></div>
+        </div>
+      </div>
+
+      <div class="panel-mock" data-demo data-target-hour="2" data-chapters="12" aria-hidden="true">
+        <div class="panel-mock-inner">
+          <div class="pm-top">
+            <span class="pm-title">奶猪水课助手</span>
+            <span class="pm-tag" data-pm-status><i></i>播放中</span>
+          </div>
+
+          <div class="pm-label">
+            <span><span data-pm-chapter>第 3 章</span> · 目标学时 2.0h</span>
+            <span class="pm-num" data-pm-hour>1.28h</span>
+          </div>
+          <div class="pm-bar striped"><i></i></div>
+
+          <div class="pm-rows">
+            <div class="pm-row"><b>失焦保护</b><span class="ok">已启用</span></div>
+            <div class="pm-row"><b>自动切章</b><span class="ok">已启用</span></div>
+            <div class="pm-row"><b>音量 / 静音</b><span>0% · 静音</span></div>
+          </div>
+
+          <div class="pm-log">
+            <div>已找到播放器元素 · video</div>
+            <div>确认播放 1s 后启用失焦守护</div>
+            <div>学时累计中，达标后关闭播放器</div>
+            <div>翻页结果已校验<span class="caret"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 为什么 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">为什么做这个</span>
+        <h2>内容早就听完了，<br>人却被要求坐在屏幕前。</h2>
+        <p>窗口一切走就暂停，切回来又要重播，一章一章手动点开更耗时。线上课最常见的矛盾，就这么每天重演一遍。</p>
+      </div>
+      <div class="note">
+        <div>
+          <b>它做什么：</b>把「等待播放进度」变成可以放在后台完成的事。<br>
+          <b>它不做什么：</b>不改动平台数据、不替你做考核、不破解付费内容、不绕过考试与身份核验。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 核心功能 -->
+  <section class="section soft">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">核心功能</span>
+        <h2>九件事，把挂课变成流程</h2>
+        <p>从开章到翻页，尽可能少地需要你动手。</p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="13" rx="2.5"/><path d="M9 9.5l4.5 2.5L9 14.5z"/><path d="M8 20.5h8"/></svg></span>
+          <span class="num">01</span>
+          <h3>失焦持续播放</h3>
+          <p>切换到其他窗口或切走标签页时视频不被暂停，学习进度继续累计。</p>
+        </article>
+        <article class="card">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l8 6-8 6z"/><path d="M17 6v12"/><path d="M13 12h8"/></svg></span>
+          <span class="num">02</span>
+          <h3>学时达标自动切章</h3>
+          <p>当前章节达到平台要求后自动关闭播放器以触发平台记录，再进入下一个未完成章节。</p>
+        </article>
+        <article class="card">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="12" height="14" rx="2"/><path d="M8 3h9a3 3 0 013 3v11"/></svg></span>
+          <span class="num">03</span>
+          <h3>课程列表自动翻页</h3>
+          <p>当前页全部完成后自动翻到下一页，翻页结果会做校验，不会误报「已全部完成」。</p>
+        </article>
+        <article class="card">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3"/></svg></span>
+          <span class="num">04</span>
+          <h3>目标学时控制</h3>
+          <p>读取章节要求学时并显示实时进度，也支持手动修改目标值。</p>
+        </article>
+        <article class="card">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13L7.5 14.5H4z"/><path d="M16 9.5a4 4 0 010 5"/><path d="M18.5 7a7.5 7.5 0 010 10"/></svg></span>
+          <span class="num">05</span>
+          <h3>音量自主控制</h3>
+          <p>面板滑块调节音量、一键静音，默认 0%，静音挂机不吵人。</p>
+        </article>
+        <article class="card">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="8" width="12" height="9" rx="2"/><rect x="13.5" y="4" width="8" height="6" rx="1.6"/><path d="M16 7h3"/></svg></span>
+          <span class="num">06</span>
+          <h3>桌面进度浮层</h3>
+          <p>最小化浏览器后在桌面显示播放进度，状态与播放器保持同步。</p>
+        </article>
+        <article class="card">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M10.5 9.5l5 2.5-5 2.5z"/></svg></span>
+          <span class="num">07</span>
+          <h3>手动开始学习</h3>
+          <p>点击「开始学习」后有 5 秒倒计时再执行，方便你先切好窗口再挂机。</p>
+        </article>
+        <article class="card">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="16" rx="2.5"/><path d="M6.5 10l2.5 2.5-2.5 2.5"/><path d="M12 15h5"/></svg></span>
+          <span class="num">08</span>
+          <h3>日志与一键诊断</h3>
+          <p>面板内置运行日志，「复制诊断」可导出播放器状态、页面结构与关键事件。</p>
+        </article>
+        <article class="card">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 8L4 12l4.5 4"/><path d="M15.5 8l4.5 4-4.5 4"/><path d="M13 5.5l-2 13"/></svg></span>
+          <span class="num">09</span>
+          <h3>自定义播放器选择器</h3>
+          <p>页面结构不同时，可手填播放器元素选择器进行适配。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 工作流程 -->
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">它是怎么跑起来的</span>
+        <h2>一条闭环，跑完整个课程列表</h2>
+        <p>每一章都走同样的路径，直到列表里没有未完成的章节。</p>
+      </div>
+
+      <div class="flow">
+        <div class="flow-track">
+          <div class="flow-node">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h11l5 5v8a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><path d="M8 12h6"/></svg></span>
+            <b>打开章节</b>
+            <span>找到播放器元素</span>
+          </div>
+          <div class="flow-arrow"><i></i></div>
+          <div class="flow-node">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span>
+            <b>后台累计</b>
+            <span>切走窗口也不暂停</span>
+          </div>
+          <div class="flow-arrow"><i style="animation-delay:.5s"></i></div>
+          <div class="flow-node">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10"/><path d="M5 6.5h4"/></svg></span>
+            <b>学时达标</b>
+            <span>关闭播放器触发记录</span>
+          </div>
+          <div class="flow-arrow"><i style="animation-delay:1s"></i></div>
+          <div class="flow-node">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7l7 5-7 5z"/><path d="M14 7l7 5-7 5z"/></svg></span>
+            <b>进入下一章</b>
+            <span>播放守护持续重试</span>
+          </div>
+          <div class="flow-arrow"><i style="animation-delay:1.5s"></i></div>
+          <div class="flow-node">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="12" rx="2"/><path d="M8 20h8"/><path d="M10 9.5l3 2.5-3 2.5z"/></svg></span>
+            <b>翻页校验</b>
+            <span>列表变了才继续</span>
+          </div>
+        </div>
+
+        <div class="flow-loop">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5A8 8 0 106 18"/><path d="M4 13.5l2-2 2 2"/></svg>
+          循环执行，直到本页没有未完成章节
+        </div>
+      </div>
+
+      <div class="stats" style="margin-top:24px">
+        <div class="stat"><b data-count="9" data-suffix="">0</b><span>项核心自动化</span></div>
+        <div class="stat"><b data-count="5" data-suffix=" 秒">0</b><span>开始学习倒计时</span></div>
+        <div class="stat"><b data-count="0" data-suffix="%">0</b><span>默认音量</span></div>
+        <div class="stat"><b data-count="4" data-suffix=" 项">0</b><span>申请的扩展权限</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 安装 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">三步装好</span>
+        <h2>解压即用，无需联网安装</h2>
+        <p>安装完成后打开课程页面，右侧会出现粉色面板。后续更新只需点扩展卡片上的「重新加载」，本地设置不会丢。</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <h3>解压到独立文件夹</h3>
+          <div class="step-bar"><i></i></div>
+          <p>确保 <code>manifest.json</code> 与 <code>icons</code>、<code>content</code> 等目录在同一层，加载时选中这一层。</p>
+        </div>
+        <div class="step">
+          <h3>打开开发者模式</h3>
+          <p>地址栏输入 <code>edge://extensions</code>（Chrome 为 <code>chrome://extensions</code>），打开右上角「开发者模式」。</p>
+        </div>
+        <div class="step">
+          <h3>加载扩展</h3>
+          <p>把文件夹拖入扩展管理页面，或点「加载解压缩的扩展」并选中它。</p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a href="download.html" class="btn btn-dark">前往下载页 <span class="arrow">→</span></a>
+        <a href="docs.html#first-run" class="btn btn-ghost">首次使用建议</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 问答速览 -->
+  <section class="section soft">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">常见问题</span>
+        <h2>先看这三条</h2>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>会不会替我做题？</summary>
+          <p>不会。课后练习与考试需要你本人完成，扩展不会自动点击任何答题按钮。</p>
+        </details>
+        <details>
+          <summary>为什么没有自动切到下一章？</summary>
+          <p>学时通常要等播放器被关闭后由平台记录。扩展会先关闭播放器再进入下一章；若当前页已全部完成，会自动翻页并校验列表内容变化后再继续。</p>
+        </details>
+        <details>
+          <summary>会收集我的数据吗？</summary>
+          <p>不会。进度、音量、日志全部在本地处理，扩展不含服务端，不收集账号信息，也不上传任何数据。</p>
+        </details>
+      </div>
+      <div class="actions">
+        <a href="docs.html#faq" class="btn btn-ghost">查看全部问答 <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true"><span></span></span>
+          奶猪水课助手
+        </a>
+        <p>一款让网课「挂着也能学完」的 Chromium 浏览器扩展。不改动平台数据，不替你做考核。</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>产品</h5>
+          <a href="index.html">首页</a>
+          <a href="download.html">下载安装</a>
+          <a href="changelog.html">更新日志</a>
+        </div>
+        <div class="footer-col">
+          <h5>了解</h5>
+          <a href="docs.html#features">功能说明</a>
+          <a href="docs.html#privacy">权限与数据</a>
+          <a href="docs.html#notice">使用须知</a>
+          <a href="docs.html#faq">常见问题</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> 奶猪水课助手 · 作者 Hanhanha</span>
+      <span>v2.3.46 · 请在学校或平台允许的前提下使用</span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="dl-modal" hidden role="dialog" aria-modal="true" aria-labelledby="dl-modal-title">
+  <div class="modal-box">
+    <h3 id="dl-modal-title">安装包暂未开放</h3>
+    <p>当前站点还没有挂上 v2.3.46 的安装包下载入口。开放后，这里会提供压缩包；下载解压即可使用，源码随包提供。</p>
+    <div class="actions">
+      <button class="btn btn-ghost btn-sm" data-close>知道了</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/config.js"></script>
+<script src="assets/main.js"></script>
+</body>
+</html>

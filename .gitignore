@@ -1,0 +1,15 @@
+# macOS / Windows
+.DS_Store
+Thumbs.db
+
+# 本地源包（已发布到 GitHub Releases，无需进仓库）
+奶猪水课助手_v2.3.46.zip
+
+# 编辑器
+*.swp
+.idea/
+.vscode/
+
+# ������ʱ/����ͼƬ
+.qoder-input-images/
+*.tmp

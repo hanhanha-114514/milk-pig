@@ -165,8 +165,44 @@
     });
   }
 
+  /* ---------- 开源仓库链接 ---------- */
+  var repoUrl = (cfg.repoUrl || '').trim();
+  var repoLinks = document.querySelectorAll('[data-repo]');
+  Array.prototype.forEach.call(repoLinks, function (el) {
+    if (!repoUrl) { return; }
+    el.setAttribute('href', repoUrl);
+    el.setAttribute('target', '_blank');
+    el.setAttribute('rel', 'noopener noreferrer');
+  });
+
+  /* Star 徽章：从 GitHub API 拉取，失败则隐藏 */
+  var repoApi = (cfg.repoApi || '').trim();
+  var starEls = document.querySelectorAll('[data-repo-stars]');
+  if (repoUrl && repoApi && starEls.length && window.fetch) {
+    fetch(repoApi, { headers: { 'Accept': 'application/vnd.github+json' } })
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+      .then(function (d) {
+        var n = d.stargazers_count || 0;
+        Array.prototype.forEach.call(starEls, function (el) {
+          el.textContent = n.toLocaleString('en-US');
+          el.closest('[data-repo-star-wrap]') && el.closest('[data-repo-star-wrap]').classList.add('has-stars');
+        });
+      })
+      .catch(function () {
+        Array.prototype.forEach.call(starEls, function (el) {
+          var wrap = el.closest('[data-repo-star-wrap]');
+          if (wrap) { wrap.style.display = 'none'; } else { el.style.display = 'none'; }
+        });
+      });
+  } else {
+    Array.prototype.forEach.call(starEls, function (el) {
+      var wrap = el.closest('[data-repo-star-wrap]');
+      if (wrap) { wrap.style.display = 'none'; }
+    });
+  }
+
   /* ---------- 滚动进场 ---------- */
-  var SELECT = '[data-reveal], .hero-copy, .section-head, .card, .flow, .flow-track > .flow-node, .stats, .versus, .step, .note, .dl-card, .spec > div, .tree, .tbl, .release, .faq details, .doc > h2, .doc > .actions, .doc-layout > .toc';
+  var SELECT = '[data-reveal], .hero-copy, .section-head, .card, .flow, .flow-track > .flow-node, .stats, .versus, .step, .note, .dl-card, .repo-card, .spec > div, .tree, .tbl, .release, .faq details, .doc > h2, .doc > .actions, .doc-layout > .toc';
   var revealables = document.querySelectorAll(SELECT);
   Array.prototype.forEach.call(document.querySelectorAll('.step'), function (s) {
     if (!s.querySelector('.step-bar')) {

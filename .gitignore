@@ -13,3 +13,5 @@ Thumbs.db
 # 本地临时/输入图片
 .qoder-input-images/
 *.tmp
+
+/_site/
